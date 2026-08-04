@@ -227,8 +227,8 @@
   <h1>Repete 2 — the FX desk</h1>
   <div class="small">OANDA v20 practice · CAD account ·
     8 major pairs ·
-    <span class="fresh" id="fresh" data-gen="2026-08-04T21:01:00.225182+00:00"
-          data-hash="e9a5b37bb6cf63d2">generated 2026-08-04T21:01Z</span>
+    <span class="fresh" id="fresh" data-gen="2026-08-04T21:11:58.579194+00:00"
+          data-hash="2988520076e27ca0">generated 2026-08-04T21:11Z</span>
   </div>
 
   <div class="hero" id="rgn-hero"><div class="htext">
@@ -272,7 +272,7 @@
   <div class="scroll"><table>
       <thead><tr><th>Heartbeat</th><th class="r">Age</th>
         <th class="r">Threshold</th><th class="r">State</th></tr></thead>
-      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.1 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.1 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-04 21:00Z</small></td><td class="r">0.0 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
+      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.0 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.0 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-04 21:00Z</small></td><td class="r">0.2 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
 
   <h2>2 · Interlock</h2>
   <p class="small">Real money needs <em>both</em> latches thrown.</p>
@@ -386,7 +386,33 @@
     from <code>bars_2018-04-03_2026-07-30.json.gz</code> @ <code>26fe5d01b92d</code>.
   </div></div>
 
-  <footer id="rgn-footer">Generated 2026-08-04T21:01:00.225182+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 0 · 0 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
+  <h2>Shadow &mdash; what the disabled strategies wanted</h2>
+  <p class="small">Nothing here was sent. The gate is pending, so the two arms
+  §2 will measure run against live data and their intents are recorded, giving
+  forward out-of-sample evidence on days that had not happened when the gate was
+  designed.</p>
+  <div id="rgn-shadow"><div class="cards">
+    <div class="card pending"><div class="v">5</div>
+      <div class="k">intents recorded</div></div>
+    <div class="card pending"><div class="v">0</div>
+      <div class="k">priced at the next bar</div></div>
+    <div class="card pending"><div class="v">5</div>
+      <div class="k">awaiting their fill bar</div></div>
+  </div>
+  <ul class="tinylist"><li>tsmom <b>5</b></li></ul>
+  <div class="callout warn">
+    <strong>Hypothetical, and optimistic.</strong> None of this was sent.
+    <code>strategies: {}</code> is empty and stays empty until something earns
+    a written PASS — these are the two §2 arms running against live data so that
+    forward, out-of-sample evidence accrues while the gate is pending.
+    <br><br>
+    No return is shown on purpose: a shadow fill is priced from the daily median
+    spread, while the decision is made fifteen minutes past the 17:00 rollover
+    where spreads widen 5&ndash;10&times;. Any P&amp;L would flatter what a real
+    order would have got.
+  </div></div>
+
+  <footer id="rgn-footer">Generated 2026-08-04T21:11:58.579194+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 0 · 0 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
 
 </div>
 <script>
