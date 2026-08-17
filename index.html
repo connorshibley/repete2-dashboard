@@ -144,9 +144,14 @@
   .cards{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0}
   .card{background:var(--surf); border:1px solid var(--line);
      border-radius:10px; padding:10px 14px; min-width:118px; flex:1 1 120px;
-     border-top:2px solid var(--line);
-     transition:transform .12s,border-color .12s}
-  .card:hover{transform:translateY(-2px); border-color:var(--blue)}
+     border-top:2px solid var(--line)}
+  /* NO :hover lift, and no transition. Removed 2026-08-16, after the owner
+     asked whether "unchecking it at the dashboard" could enable live trading.
+     Cards that rise and turn blue under the cursor read as buttons. On a page
+     about a trading bot an element that LOOKS like a control is a real
+     problem even when the page has none — someone can believe they armed or
+     disarmed something. Nothing here is clickable and nothing should look it.
+     Pinned by tests/test_the_dashboard_has_no_controls.py. */
   .card .v{font-size:19px; font-weight:600; font-variant-numeric:tabular-nums}
   .card .k{font-size:11px; color:var(--ink2)}
   .card.big{min-width:150px} .card.big .v{font-size:25px}
@@ -206,6 +211,20 @@
      padding:10px 14px; font-size:13px; margin:12px 0}
   .callout.warn{border-left-color:var(--amber)}
   .callout strong{color:var(--ink)}
+  /* Label/value rows for the interlock. Deliberately NOT `.tinylist`:
+     bordered rounded chips read as toggles, which is what prompted the
+     "can I uncheck it?" question on 2026-08-16. No border, no fill, no
+     radius — nothing with an edge that suggests it can be pressed. */
+  .kvlist{margin:8px 0 0}
+  .kv{display:flex; gap:10px; align-items:baseline; padding:3px 0;
+     border-bottom:1px dotted var(--line); font-size:12.5px;
+     font-variant-numeric:tabular-nums}
+  .kv:last-of-type{border-bottom:none}
+  .kvk{color:var(--ink2); min-width:190px}
+  .kvv{color:var(--ink)}
+  .readonly{margin:10px 0 0; font-size:11.5px; line-height:1.7;
+     color:var(--mut); max-width:70ch}
+  .readonly code{font-size:11px}
   .tinylist{list-style:none; padding:0; margin:8px 0 0; display:flex;
      flex-wrap:wrap; gap:8px}
   .tinylist li{background:var(--surf); border:1px solid var(--line);
@@ -227,8 +246,8 @@
   <h1>Repete 2 — the FX desk</h1>
   <div class="small">OANDA v20 practice · CAD account ·
     8 major pairs ·
-    <span class="fresh" id="fresh" data-gen="2026-08-17T19:45:11.100909+00:00"
-          data-hash="243fd008316407f5">generated 2026-08-17T19:45Z</span>
+    <span class="fresh" id="fresh" data-gen="2026-08-17T20:00:17.164805+00:00"
+          data-hash="23fb15786df343be">generated 2026-08-17T20:00Z</span>
   </div>
 
   <div class="hero" id="rgn-hero"><div class="htext">
@@ -258,7 +277,7 @@
       <div class="v">0</div>
       <div class="k">closed trades</div></div>
     <div class="card big loss">
-      <div class="v">49.9%</div>
+      <div class="v">50.0%</div>
       <div class="k">news coverage · needs 90%</div></div>
     <div class="card big"><div class="v">100,000</div>
       <div class="k">NAV, CAD — untouched</div></div></div>
@@ -272,11 +291,11 @@
   <div class="scroll"><table>
       <thead><tr><th>Heartbeat</th><th class="r">Age</th>
         <th class="r">Threshold</th><th class="r">State</th></tr></thead>
-      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.1 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.1 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-17 11:10Z</small></td><td class="r">0.7 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
+      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.3 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.3 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-17 11:10Z</small></td><td class="r">0.0 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
 
   <h2>2 · Interlock</h2>
   <p class="small">Real money needs <em>both</em> latches thrown.</p>
-  <ul class="tinylist" id="rgn-interlock"><li>mode <b>paper</b></li><li>host <b>api-fxpractice.oanda.com</b> (practice)</li><li>LIVE_TRADING_CONFIRMED <b>NO</b></li><li>real money reachable <b>no</b></li></ul>
+  <div class="kvlist" id="rgn-interlock"><div class="kv"><span class="kvk">mode</span><span class="kvv"><b>paper</b></span></div><div class="kv"><span class="kvk">host</span><span class="kvv">api-fxpractice.oanda.com (practice)</span></div><div class="kv"><span class="kvk">LIVE_TRADING_CONFIRMED</span><span class="kvv"><b>NO</b></span></div><div class="kv"><span class="kvk">real money reachable</span><span class="kvv"><b>no</b></span></div><p class="readonly">This page is a <b>read-only mirror</b>. It has no controls — nothing on it can start, stop or change the bot. Every switch lives on the host, and going live takes <b>two</b> separate actions there: an edit to <code>config.yaml</code> <em>and</em> a restart of the scheduler, because <code>.env</code> is cached at process start and does not reload with the config.</p></div>
 
   <h2>3 · Gate</h2>
   <p class="small">The trial count is the denominator in every Bonferroni
@@ -299,7 +318,7 @@
   weekend is not a gap.</p>
   <div id="rgn-collection"><div class="cards">
     <div class="card loss">
-      <div class="v">49.9%</div>
+      <div class="v">50.0%</div>
       <div class="k">coverage · needs 90%</div></div>
     <div class="card win">
       <div class="v">10 / 10</div>
@@ -309,7 +328,7 @@
     <div class="card"><div class="v">755</div>
       <div class="k">items archived</div></div>
   </div>
-  <p class="small">251 of 503
+  <p class="small">252 of 504
   expected market hours over 30 d. Blocking Phase 4:
   <b>coverage</b>. 0 item(s) claim to have been
   published after we observed them — measured evidence that
@@ -412,7 +431,7 @@
     order would have got.
   </div></div>
 
-  <footer id="rgn-footer">Generated 2026-08-17T19:45:11.100909+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 0 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
+  <footer id="rgn-footer">Generated 2026-08-17T20:00:17.164805+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 0 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
 
 </div>
 <script>
