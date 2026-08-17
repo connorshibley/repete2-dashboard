@@ -246,8 +246,8 @@
   <h1>Repete 2 — the FX desk</h1>
   <div class="small">OANDA v20 practice · CAD account ·
     8 major pairs ·
-    <span class="fresh" id="fresh" data-gen="2026-08-17T20:45:26.801726+00:00"
-          data-hash="3afa52d5aeeaadf8">generated 2026-08-17T20:45Z</span>
+    <span class="fresh" id="fresh" data-gen="2026-08-17T21:00:35.994068+00:00"
+          data-hash="50c86dfda9fac629">generated 2026-08-17T21:00Z</span>
   </div>
 
   <div class="hero" id="rgn-hero"><div class="htext">
@@ -277,7 +277,7 @@
       <div class="v">0</div>
       <div class="k">closed trades</div></div>
     <div class="card big loss">
-      <div class="v">50.0%</div>
+      <div class="v">50.1%</div>
       <div class="k">news coverage · needs 90%</div></div>
     <div class="card big"><div class="v">100,000</div>
       <div class="k">NAV, CAD — untouched</div></div></div>
@@ -291,7 +291,7 @@
   <div class="scroll"><table>
       <thead><tr><th>Heartbeat</th><th class="r">Age</th>
         <th class="r">Threshold</th><th class="r">State</th></tr></thead>
-      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.0 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.0 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-17 11:10Z</small></td><td class="r">0.8 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
+      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle<small>No strategy is enabled to run one</small></td><td class="r">0.3 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">0.3 h</td><td class="r">2 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-17 21:00Z</small></td><td class="r">0.0 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
 
   <h2>2 · Interlock</h2>
   <p class="small">Real money needs <em>both</em> latches thrown.</p>
@@ -318,17 +318,17 @@
   weekend is not a gap.</p>
   <div id="rgn-collection"><div class="cards">
     <div class="card loss">
-      <div class="v">50.0%</div>
+      <div class="v">50.1%</div>
       <div class="k">coverage · needs 90%</div></div>
     <div class="card win">
       <div class="v">10 / 10</div>
       <div class="k">sources returning data</div></div>
     <div class="card warnc"><div class="v">11</div>
       <div class="k">thinnest: boc_news</div></div>
-    <div class="card"><div class="v">755</div>
+    <div class="card"><div class="v">785</div>
       <div class="k">items archived</div></div>
   </div>
-  <p class="small">252 of 504
+  <p class="small">253 of 505
   expected market hours over 30 d. Blocking Phase 4:
   <b>coverage</b>. 0 item(s) claim to have been
   published after we observed them — measured evidence that
@@ -362,6 +362,39 @@
       <div class="k">realized P&amp;L, CAD</div></div>
     <div class="card"><div class="v">100,000.00</div>
       <div class="k">NAV, CAD</div></div>
+  </div></div>
+
+  <h2>The open book</h2>
+  <p class="small">What the account is actually holding, as of the last cycle's
+  mark. Positions of two different kinds sit side by side here, because the
+  venue nets by instrument and cannot keep them apart: the strategy's, and
+  §15's financing instruments, which are an experiment rather than a trade.</p>
+  <div id="rgn-positions"><div class="scroll"><table>
+      <thead><tr><th>Pair</th><th>Side</th><th class="r">Units</th>
+        <th class="r">Avg price</th>
+        <th class="r">Unrealized, CAD</th>
+        <th>What it is</th></tr></thead>
+      <tbody><tr><td class="lab">AUD_JPY</td><td>?</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">AUD_USD</td><td>?</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r"><span style="color:var(--red)">-1.56</span></td><td>strategy</td></tr><tr><td class="lab">EUR_USD</td><td>?</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">USD_CAD</td><td>?</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">USD_CHF</td><td>?</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r"><span style="color:var(--red)">-0.12</span></td><td>strategy</td></tr></tbody></table></div>
+  <div class="legend">
+    <span><span class="fresh green">ok</span> marked under an hour old</span>
+    <span>2026-08-17T20:45:14.865639+00:00</span>
+    <span>5 open &middot; 3 of them
+      instruments</span>
+  </div>
+  <p class="small">3 of these are §15 measurement instruments and show no P&amp;L — they are a financing experiment, not trades</p>
+  <div class="callout warn">
+    <strong>A photograph, not a feed.</strong> The book is marked once per
+    cycle, at 17:15 ET, from the broker the cycle already holds. This page
+    cannot ask the venue itself &mdash; the local server is structurally barred
+    from constructing one, and the published copy is a static file with no
+    server behind it. So the age above is part of the reading.
+    <br><br>
+    No total is shown. Nothing here is closed, so none of it is a result: the
+    P&amp;L section counts closed trades only, and a summed unrealized figure
+    would be exactly the headline that rule refuses. The withheld rows are
+    §15's financing instruments &mdash; real positions opened to measure the
+    swap day-count, pre-registered with the clause that no P&amp;L from them
+    may ever be cited.
   </div></div>
 
   <h2>Measured spreads — and the ones that were wrong</h2>
@@ -431,7 +464,7 @@
     order would have got.
   </div></div>
 
-  <footer id="rgn-footer">Generated 2026-08-17T20:45:26.801726+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
+  <footer id="rgn-footer">Generated 2026-08-17T21:00:35.994068+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
 
 </div>
 <script>
