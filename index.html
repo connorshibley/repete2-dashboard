@@ -189,6 +189,19 @@
   .rail.untracked{opacity:.55; border-style:dotted}
   .rail.untracked .rc{font-style:italic}
 
+  /* ---- charts -------------------------------------------------------------
+     CSS classes only, never a hex fill/stroke attribute — see
+     svg_line_chart's own docstring for why that is load-bearing in dark
+     mode. `svg{...}` gives every chart the same card look as a table for
+     free, matching tradingfloor's own trick. */
+  svg{background:var(--surf); border:1px solid var(--line); border-radius:10px}
+  .s-equity{stroke:var(--blue)}
+  .s-grid{stroke:var(--line)}
+  .s-zero{stroke:var(--mut)}
+  .f-mut{fill:var(--mut)}
+  .f-win{fill:var(--green)}
+  .f-loss{fill:var(--red)}
+
   /* ---- rows ------------------------------------------------------------- */
   table{width:100%; border-collapse:collapse; font-size:13px}
   .scroll{overflow-x:auto; border:1px solid var(--line); border-radius:10px}
@@ -274,8 +287,8 @@
   <h1>Repete 2 — the FX desk</h1>
   <div class="small">OANDA v20 practice · CAD account ·
     8 major pairs ·
-    <span class="fresh" id="fresh" data-gen="2026-08-19T19:00:35.687120+00:00"
-          data-hash="56336f086b160e7a">generated 2026-08-19T19:00Z</span>
+    <span class="fresh" id="fresh" data-gen="2026-08-19T19:15:40.329364+00:00"
+          data-hash="b02edd56213c9057">generated 2026-08-19T19:15Z</span>
   </div>
 
   <div class="hero" id="rgn-hero"><div class="htext">
@@ -322,7 +335,7 @@
   <div class="scroll"><table>
       <thead><tr><th>Heartbeat</th><th class="r">Age</th>
         <th class="r">Threshold</th><th class="r">State</th></tr></thead>
-      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle</td><td class="r">21.8 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">21.8 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-19 19:00Z</small></td><td class="r">0.0 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
+      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle</td><td class="r">22.0 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">22.0 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-19 19:00Z</small></td><td class="r">0.3 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
 
   <h2>2 · Interlock</h2>
   <p class="small">Real money needs <em>both</em> latches thrown.</p>
@@ -403,6 +416,11 @@
       <div class="k">NAV, CAD</div></div>
   </div></div>
 
+  <h2>💰 Equity</h2>
+  <p class="small">Every completed cycle's equity reading, oldest to newest.
+  No smoothing, no rebasing — a quiet line here is not a rendering choice.</p>
+  <div id="rgn-equity"><svg viewBox="0 0 760 180" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="equity"><line x1="40" y1="140.0" x2="720" y2="140.0" class="s-grid" stroke-width="1"/><text x="34" y="143.0" font-size="10" text-anchor="end" class="f-mut">99,957</text><line x1="40" y1="90.0" x2="720" y2="90.0" class="s-grid" stroke-width="1"/><text x="34" y="93.0" font-size="10" text-anchor="end" class="f-mut">100,032</text><line x1="40" y1="40.0" x2="720" y2="40.0" class="s-grid" stroke-width="1"/><text x="34" y="43.0" font-size="10" text-anchor="end" class="f-mut">100,106</text><polyline fill="none" class="s-equity" stroke-width="2" points="40.0,111.3 48.2,111.3 56.4,111.3 64.6,111.3 72.8,111.3 81.0,111.3 89.2,111.3 97.3,111.3 105.5,111.3 113.7,111.3 121.9,111.3 130.1,111.3 138.3,111.3 146.5,111.3 154.7,111.3 162.9,111.3 171.1,111.3 179.3,111.3 187.5,111.3 195.7,111.3 203.9,111.3 212.0,111.3 220.2,111.3 228.4,111.3 236.6,111.3 244.8,111.3 253.0,111.3 261.2,111.3 269.4,111.3 277.6,111.3 285.8,111.3 294.0,111.3 302.2,111.3 310.4,111.3 318.6,111.3 326.7,111.3 334.9,111.3 343.1,111.3 351.3,111.3 359.5,111.3 367.7,111.3 375.9,111.3 384.1,111.3 392.3,111.3 400.5,111.3 408.7,114.6 416.9,114.1 425.1,113.4 433.3,104.8 441.4,129.9 449.6,140.0 457.8,105.9 466.0,113.7 474.2,114.3 482.4,106.0 490.6,105.4 498.8,102.9 507.0,103.4 515.2,103.0 523.4,102.6 531.6,105.0 539.8,106.2 548.0,107.7 556.1,107.5 564.3,108.1 572.5,108.5 580.7,107.7 588.9,107.7 597.1,107.1 605.3,107.7 613.5,87.6 621.7,88.5 629.9,88.2 638.1,91.5 646.3,91.3 654.5,95.2 662.7,95.2 670.8,100.0 679.0,61.2 687.2,59.3 695.4,59.7 703.6,60.5 711.8,76.6 720.0,40.0"/><circle cx="40.0" cy="111.3" r="9" fill="transparent" data-tip="2026-08-03 · 100,000.00"/><circle cx="48.2" cy="111.3" r="9" fill="transparent" data-tip="2026-08-03 · 100,000.00"/><circle cx="56.4" cy="111.3" r="9" fill="transparent" data-tip="2026-08-03 · 100,000.00"/><circle cx="64.6" cy="111.3" r="9" fill="transparent" data-tip="2026-08-03 · 100,000.00"/><circle cx="72.8" cy="111.3" r="9" fill="transparent" data-tip="2026-08-03 · 100,000.00"/><circle cx="81.0" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="89.2" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="97.3" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="105.5" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="113.7" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="121.9" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="130.1" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="138.3" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="146.5" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="154.7" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="162.9" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="171.1" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="179.3" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="187.5" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="195.7" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="203.9" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="212.0" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="220.2" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="228.4" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="236.6" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="244.8" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="253.0" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="261.2" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="269.4" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="277.6" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="285.8" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="294.0" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="302.2" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="310.4" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="318.6" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="326.7" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="334.9" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="343.1" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="351.3" cy="111.3" r="9" fill="transparent" data-tip="2026-08-04 · 100,000.00"/><circle cx="359.5" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="367.7" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="375.9" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="384.1" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="392.3" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="400.5" cy="111.3" r="9" fill="transparent" data-tip="2026-08-05 · 100,000.00"/><circle cx="408.7" cy="114.6" r="9" fill="transparent" data-tip="2026-08-05 · 99,995.17"/><circle cx="416.9" cy="114.1" r="9" fill="transparent" data-tip="2026-08-05 · 99,995.89"/><circle cx="425.1" cy="113.4" r="9" fill="transparent" data-tip="2026-08-05 · 99,996.86"/><circle cx="433.3" cy="104.8" r="9" fill="transparent" data-tip="2026-08-05 · 100,009.70"/><circle cx="441.4" cy="129.9" r="9" fill="transparent" data-tip="2026-08-06 · 99,972.37"/><circle cx="449.6" cy="140.0" r="9" fill="transparent" data-tip="2026-08-08 · 99,957.37"/><circle cx="457.8" cy="105.9" r="9" fill="transparent" data-tip="2026-08-10 · 100,008.02"/><circle cx="466.0" cy="113.7" r="9" fill="transparent" data-tip="2026-08-11 · 99,996.45"/><circle cx="474.2" cy="114.3" r="9" fill="transparent" data-tip="2026-08-12 · 99,995.48"/><circle cx="482.4" cy="106.0" r="9" fill="transparent" data-tip="2026-08-12 · 100,007.85"/><circle cx="490.6" cy="105.4" r="9" fill="transparent" data-tip="2026-08-12 · 100,008.72"/><circle cx="498.8" cy="102.9" r="9" fill="transparent" data-tip="2026-08-13 · 100,012.50"/><circle cx="507.0" cy="103.4" r="9" fill="transparent" data-tip="2026-08-13 · 100,011.74"/><circle cx="515.2" cy="103.0" r="9" fill="transparent" data-tip="2026-08-13 · 100,012.37"/><circle cx="523.4" cy="102.6" r="9" fill="transparent" data-tip="2026-08-13 · 100,012.93"/><circle cx="531.6" cy="105.0" r="9" fill="transparent" data-tip="2026-08-13 · 100,009.39"/><circle cx="539.8" cy="106.2" r="9" fill="transparent" data-tip="2026-08-13 · 100,007.59"/><circle cx="548.0" cy="107.7" r="9" fill="transparent" data-tip="2026-08-13 · 100,005.40"/><circle cx="556.1" cy="107.5" r="9" fill="transparent" data-tip="2026-08-13 · 100,005.69"/><circle cx="564.3" cy="108.1" r="9" fill="transparent" data-tip="2026-08-13 · 100,004.76"/><circle cx="572.5" cy="108.5" r="9" fill="transparent" data-tip="2026-08-13 · 100,004.22"/><circle cx="580.7" cy="107.7" r="9" fill="transparent" data-tip="2026-08-13 · 100,005.28"/><circle cx="588.9" cy="107.7" r="9" fill="transparent" data-tip="2026-08-13 · 100,005.35"/><circle cx="597.1" cy="107.1" r="9" fill="transparent" data-tip="2026-08-13 · 100,006.29"/><circle cx="605.3" cy="107.7" r="9" fill="transparent" data-tip="2026-08-13 · 100,005.38"/><circle cx="613.5" cy="87.6" r="9" fill="transparent" data-tip="2026-08-14 · 100,035.19"/><circle cx="621.7" cy="88.5" r="9" fill="transparent" data-tip="2026-08-14 · 100,033.82"/><circle cx="629.9" cy="88.2" r="9" fill="transparent" data-tip="2026-08-14 · 100,034.26"/><circle cx="638.1" cy="91.5" r="9" fill="transparent" data-tip="2026-08-14 · 100,029.47"/><circle cx="646.3" cy="91.3" r="9" fill="transparent" data-tip="2026-08-14 · 100,029.64"/><circle cx="654.5" cy="95.2" r="9" fill="transparent" data-tip="2026-08-14 · 100,023.95"/><circle cx="662.7" cy="95.2" r="9" fill="transparent" data-tip="2026-08-15 · 100,023.95"/><circle cx="670.8" cy="100.0" r="9" fill="transparent" data-tip="2026-08-16 · 100,016.78"/><circle cx="679.0" cy="61.2" r="9" fill="transparent" data-tip="2026-08-17 · 100,074.46"/><circle cx="687.2" cy="59.3" r="9" fill="transparent" data-tip="2026-08-17 · 100,077.28"/><circle cx="695.4" cy="59.7" r="9" fill="transparent" data-tip="2026-08-17 · 100,076.66"/><circle cx="703.6" cy="60.5" r="9" fill="transparent" data-tip="2026-08-17 · 100,075.45"/><circle cx="711.8" cy="76.6" r="9" fill="transparent" data-tip="2026-08-17 · 100,051.48"/><circle cx="720.0" cy="40.0" r="9" fill="transparent" data-tip="2026-08-18 · 100,105.92"/><text x="40" y="172" font-size="10" class="f-mut">2026-08-03</text><text x="652" y="172" font-size="10" class="f-mut">2026-08-18</text></svg></div>
+
   <h2>The open book</h2>
   <p class="small">What the account is actually holding, as of the last cycle's
   mark. Positions of two different kinds sit side by side here, because the
@@ -436,6 +454,40 @@
     swap day-count, pre-registered with the clause that no P&amp;L from them
     may ever be cited.
   </div></div>
+
+  <h2>📐 Measurement</h2>
+  <p class="small">What each §15 instrument above exists to answer, and every
+  financing-reconciliation check recorded against it since. This is a
+  cost-model accuracy record, never a P&amp;L — see the open book above for
+  why no result can be attributed to these positions.</p>
+  <div id="rgn-measurement"><div class="cards"><div class="card loss">
+      <div class="v">AUD_JPY</div>
+      <div class="k">the reverted AUD entries (§6, divergence #3) and the transient 8-day week the probe reports</div>
+      <p class="small" style="margin:8px 0 0">
+        13 financing check(s) — day_count_divergence×1, ok×9, skipped_market_shut×2, uncheckable×1
+        · still held</p>
+    </div><div class="card win">
+      <div class="v">EUR_USD</div>
+      <div class="k">the plain FINANCING_DAYS_BY_WEEKDAY default</div>
+      <p class="small" style="margin:8px 0 0">
+        13 financing check(s) — ok×11, skipped_market_shut×2
+        · still held</p>
+    </div><div class="card win">
+      <div class="v">USD_CAD</div>
+      <div class="k">the T+1 override (Thu3/Fri1), corrected 2026-08-03 and never checked against a real charge</div>
+      <p class="small" style="margin:8px 0 0">
+        13 financing check(s) — ok×11, skipped_market_shut×2
+        · still held</p>
+    </div></div></div>
+
+  <h2>⚖️ Recent decisions</h2>
+  <p class="small">Every decision the ledger has ever recorded, newest first —
+  never capped, never collapsed. "Status" reads from whether the ledger holds
+  a matching outcome, not from asking the venue directly.</p>
+  <div id="rgn-decisions"><div class="scroll"><table>
+      <thead><tr><th>When</th><th>Pair</th><th>Strategy</th><th>Decision</th>
+        <th class="r">Units</th><th class="r">Entry</th><th>Status</th></tr>
+      </thead><tbody><tr><td>2026-08-17T20:37Z</td><td class="lab">AUD_USD</td><td>tsmom</td><td>open short</td><td class="r">11,133</td><td class="r">0.71035</td><td><span style="color:var(--green)">open</span></td></tr><tr><td>2026-08-17T20:37Z</td><td class="lab">USD_CAD</td><td>tsmom</td><td>open long</td><td class="r">10,007</td><td class="r">1.38753</td><td><span style="color:var(--green)">open</span></td></tr><tr><td>2026-08-17T20:37Z</td><td class="lab">USD_CHF</td><td>tsmom</td><td>open long</td><td class="r">7,209</td><td class="r">0.81104</td><td><span style="color:var(--green)">open</span></td></tr></tbody></table></div></div>
 
   <h2>Measured spreads — and the ones that were wrong</h2>
   <p class="small">A 24-hour sweep ran entirely inside the weekend close and
@@ -504,7 +556,14 @@
     order would have got.
   </div></div>
 
-  <footer id="rgn-footer">Generated 2026-08-19T19:00:35.687120+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
+  <h2>🧠 Lessons</h2>
+  <p class="small">The hypothesis book — falsifiable claims graded from
+  closed, scored trades. Feeds only the veto/downsize judgment layer, never
+  sizing or signals (invariant #10). Empty is the honest reading today: the
+  close-trade pipeline only started recording outcomes on 2026-08-19.</p>
+  <div id="rgn-lessons"><p class="small">no lessons yet — needs closed, scored trades first</p></div>
+
+  <footer id="rgn-footer">Generated 2026-08-19T19:15:40.329364+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account, real orders and all — no strategy here has demonstrated it should be trusted with real money, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
 
 </div>
 <script>
