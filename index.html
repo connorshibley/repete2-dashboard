@@ -161,6 +161,34 @@
   .card.zero{border-top-color:var(--red)} .card.zero .v{color:var(--red)}
   .card.pending{border-top-color:var(--line); opacity:.72}
 
+  /* ---- card groups -------------------------------------------------------
+     Clusters cards under a label without a new card style — tradingfloor's
+     "Performance / Book / Activity" pattern, ported. The grouping is purely
+     presentational: it wraps EXISTING cards, and touches none of their
+     data-* attributes, so artifactcheck's teeth checks read the same page. */
+  .cardgroup{margin:0 0 10px}
+  .cardgroup h3{margin:0 0 6px}
+  .cardgroup .cards{margin-bottom:0}
+
+  /* ---- rails -------------------------------------------------------------
+     tradingfloor's chip-grid pattern, repete2's own rail vocabulary (see
+     web/dashdata.py::RAILS). THREE states, not two: `.cold` is a rail this
+     repo can genuinely confirm fired zero times; `.untracked` is a rail that
+     is real and enforced but has no ledger event to confirm anything about —
+     visually distinct on purpose, so "never fired" is never shown for a rail
+     nobody is counting. */
+  .railgrid{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0}
+  .rail{flex:1 1 150px; min-width:140px; background:var(--surf);
+     border:1px solid var(--line); border-radius:9px; padding:9px 12px}
+  .rail .rn{font-size:12px; font-weight:600}
+  .rail .rv{font-size:11px; color:var(--ink2); margin-top:2px}
+  .rail .rc{font-size:11px; color:var(--mut); margin-top:4px}
+  .rail.bound{border-color:var(--amber)}
+  .rail.bound .rc{color:var(--amber)}
+  .rail.cold{opacity:.72; border-style:dashed}
+  .rail.untracked{opacity:.55; border-style:dotted}
+  .rail.untracked .rc{font-style:italic}
+
   /* ---- rows ------------------------------------------------------------- */
   table{width:100%; border-collapse:collapse; font-size:13px}
   .scroll{overflow-x:auto; border:1px solid var(--line); border-radius:10px}
@@ -246,8 +274,8 @@
   <h1>Repete 2 — the FX desk</h1>
   <div class="small">OANDA v20 practice · CAD account ·
     8 major pairs ·
-    <span class="fresh" id="fresh" data-gen="2026-08-19T18:45:28.243948+00:00"
-          data-hash="80f42e398b86e4bb">generated 2026-08-19T18:45Z</span>
+    <span class="fresh" id="fresh" data-gen="2026-08-19T19:00:35.687120+00:00"
+          data-hash="56336f086b160e7a">generated 2026-08-19T19:00Z</span>
   </div>
 
   <div class="hero" id="rgn-hero"><div class="htext">
@@ -264,23 +292,26 @@
   <div class="tape" aria-label="Carry rates by pair, annualised"
        id="rgn-tape"><div class="tape-track"><span class="tchip up">USD_CHF <b>+2.85%</b></span><span class="tchip up">AUD_JPY <b>+2.36%</b></span><span class="tchip up">USD_JPY <b>+1.75%</b></span><span class="tchip up">USD_CAD <b>+0.45%</b></span><span class="tchip dn">AUD_USD <b>−0.41%</b></span><span class="tchip dn">GBP_USD <b>−0.96%</b></span><span class="tchip dn">NZD_USD <b>−2.28%</b></span><span class="tchip dn">EUR_USD <b>−2.46%</b></span><span class="tchip"><span class="livedot"></span>snapshot financing</span><span class="tchip up">USD_CHF <b>+2.85%</b></span><span class="tchip up">AUD_JPY <b>+2.36%</b></span><span class="tchip up">USD_JPY <b>+1.75%</b></span><span class="tchip up">USD_CAD <b>+0.45%</b></span><span class="tchip dn">AUD_USD <b>−0.41%</b></span><span class="tchip dn">GBP_USD <b>−0.96%</b></span><span class="tchip dn">NZD_USD <b>−2.28%</b></span><span class="tchip dn">EUR_USD <b>−2.46%</b></span><span class="tchip"><span class="livedot"></span>snapshot financing</span></div></div>
 
-  <div class="cards" id="rgn-cards"><div class="card big "
+  <div id="rgn-cards"><div class="cardgroup"><h3>Programme</h3>
+      <div class="cards"><div class="card big "
        data-trials="4"><div class="v">4</div>
       <div class="k">registered trials</div></div>
     <div class="card big win"
        data-enabled="1"
        data-enabled-names="tsmom">
       <div class="v">1</div>
-      <div class="k">strategies enabled</div></div>
-    <div class="card big zero"
+      <div class="k">strategies enabled</div></div></div></div>
+    <div class="cardgroup"><h3>Book</h3>
+      <div class="cards"><div class="card big zero"
        data-closed="0">
       <div class="v">0</div>
       <div class="k">closed trades</div></div>
-    <div class="card big loss">
-      <div class="v">55.6%</div>
-      <div class="k">news coverage · needs 90%</div></div>
     <div class="card big"><div class="v">100,000</div>
-      <div class="k">NAV, CAD — untouched</div></div></div>
+      <div class="k">NAV, CAD — untouched</div></div></div></div>
+    <div class="cardgroup"><h3>Trust</h3>
+      <div class="cards"><div class="card big loss">
+      <div class="v">55.8%</div>
+      <div class="k">news coverage · needs 90%</div></div></div></div></div>
 
   <div class="callout"><strong>Nothing here has passed a gate.</strong> That is the accurate state, not a placeholder. <code>strategies: {}</code> is empty by design and stays empty until something earns a written PASS. Across the two predecessor bots this programme registered 78+ trials and adopted none of them.</div>
 
@@ -291,7 +322,7 @@
   <div class="scroll"><table>
       <thead><tr><th>Heartbeat</th><th class="r">Age</th>
         <th class="r">Threshold</th><th class="r">State</th></tr></thead>
-      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle</td><td class="r">21.5 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">21.5 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-19 08:00Z</small></td><td class="r">0.8 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
+      <tbody id="rgn-alive"><tr><td class="lab">Trading cycle</td><td class="r">21.8 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">Price feed</td><td class="r">21.8 h</td><td class="r">30 h</td><td class="r"><span class="fresh green">ok</span></td></tr><tr><td class="lab">News collector<small>measures the SWEEP, not item arrival · last new item 2026-08-19 19:00Z</small></td><td class="r">0.0 h</td><td class="r">3 h</td><td class="r"><span class="fresh green">ok</span></td></tr></tbody></table></div>
 
   <h2>2 · Interlock</h2>
   <p class="small">Real money needs <em>both</em> latches thrown.</p>
@@ -312,23 +343,31 @@
       <div class="k">enabled without a gate</div></div></div>
   <p class="small">§2 is pre-registered and waiting: <code>carry</code> and <code>tsmom</code>, both EDGE claims, K=2. A third arm — <code>xscarry</code>, cross-sectional carry — is built and registered but deliberately held back, because adding it would raise the bar on the two arms that already have priors.</p>
 
+  <h2>🚦 The rails</h2>
+  <p class="small">Every constraint <code>risk.py</code> actually enforces,
+  with its configured value and whether it has ever bound. A dotted chip is
+  not the same claim as a dashed one — <em>"never fired"</em> requires a
+  ledger record to say so, and most of these rails have never needed one:
+  nothing has hit a cap yet.</p>
+  <div id="rgn-rails"><div class="railgrid"><div class="rail untracked"><div class="rn">max_open_positions</div><div class="rv">4 positions</div><div class="rc">not yet observable</div></div><div class="rail untracked"><div class="rn">max_trades_per_day</div><div class="rv">3 trades/day</div><div class="rc">not yet observable</div></div><div class="rail untracked"><div class="rn">max_notional_leverage</div><div class="rv">0.30 x</div><div class="rc">not yet observable</div></div><div class="rail untracked"><div class="rn">max_currency_exposure_pct</div><div class="rv">25 %</div><div class="rc">not yet observable</div></div><div class="rail untracked"><div class="rn">min_holding_days</div><div class="rv">2 days (swing guard)</div><div class="rc">not yet observable</div></div><div class="rail cold"><div class="rn">daily_loss_limit_pct</div><div class="rv">2 %</div><div class="rc">never fired</div></div><div class="rail cold"><div class="rn">max_entry_drift_bps</div><div class="rv">50 bps</div><div class="rc">never fired</div></div><div class="rail cold"><div class="rn">max_bar_age_days</div><div class="rv">7 days</div><div class="rc">never fired</div></div><div class="rail bound"><div class="rn">measurement exclusion</div><div class="rc">3× fired</div></div><div class="rail bound"><div class="rn">HALT</div><div class="rc">1× fired</div></div></div></div>
+
   <h2>4 · Collection</h2>
   <p class="small">News cannot be re-fetched later, so it collects from day one
   and is trusted last. Coverage counts market-open hours, not wall-clock — the
   weekend is not a gap.</p>
   <div id="rgn-collection"><div class="cards">
     <div class="card loss">
-      <div class="v">55.6%</div>
+      <div class="v">55.8%</div>
       <div class="k">coverage · needs 90%</div></div>
     <div class="card win">
       <div class="v">10 / 10</div>
       <div class="k">sources returning data</div></div>
     <div class="card warnc"><div class="v">11</div>
       <div class="k">thinnest: boc_news</div></div>
-    <div class="card"><div class="v">818</div>
+    <div class="card"><div class="v">819</div>
       <div class="k">items archived</div></div>
   </div>
-  <p class="small">294 of 529
+  <p class="small">295 of 529
   expected market hours over 30 d. Blocking Phase 4:
   <b>coverage</b>. 0 item(s) claim to have been
   published after we observed them — measured evidence that
@@ -374,20 +413,21 @@
         <th class="r">Avg price</th>
         <th class="r">Unrealized, CAD</th>
         <th>What it is</th></tr></thead>
-      <tbody><tr><td class="lab">AUD_JPY</td><td>long</td><td class="r">10,000</td><td class="r">111.147</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">AUD_USD</td><td>short</td><td class="r">11,133</td><td class="r">0.71034</td><td class="r"><span style="color:var(--red)">-16.79</span></td><td>strategy</td></tr><tr><td class="lab">EUR_USD</td><td>long</td><td class="r">10,000</td><td class="r">1.15466</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">USD_CAD</td><td>long</td><td class="r">10,000</td><td class="r">1.40206</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr></tbody></table></div>
+      <tbody><tr><td class="lab">AUD_JPY</td><td>long</td><td class="r">10,000</td><td class="r">111.147</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">AUD_USD</td><td>short</td><td class="r">11,133</td><td class="r">0.71034</td><td class="r"><span style="color:var(--red)">-30.28</span></td><td>strategy</td></tr><tr><td class="lab">EUR_USD</td><td>long</td><td class="r">10,000</td><td class="r">1.15466</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr><tr><td class="lab">USD_CAD</td><td>long</td><td class="r">10,000</td><td class="r">1.40206</td><td class="r"><span class="mut" title="a §15 instrument — no P&amp;L from these may be cited">withheld</span></td><td>instrument</td></tr></tbody></table></div>
   <div class="legend">
     <span><span class="fresh green">ok</span> marked under an hour old</span>
-    <span>2026-08-19T18:00:19.286346+00:00</span>
+    <span>2026-08-19T19:00:35.378052+00:00</span>
     <span>4 open &middot; 3 of them
       instruments</span>
   </div>
   <p class="small">3 of these are §15 measurement instruments and show no P&amp;L — they are a financing experiment, not trades</p>
   <div class="callout warn">
-    <strong>A photograph, not a feed.</strong> The book is marked once per
-    cycle, at 17:15 ET, from the broker the cycle already holds. This page
-    cannot ask the venue itself &mdash; the local server is structurally barred
-    from constructing one, and the published copy is a static file with no
-    server behind it. So the age above is part of the reading.
+    <strong>A photograph, not a feed.</strong> The book is marked hourly during
+    market hours, from the broker directly &mdash; not derived from a trading
+    cycle, which only runs once a day. This page cannot ask the venue itself
+    &mdash; the local server is structurally barred from constructing one, and
+    the published copy is a static file with no server behind it. So the age
+    above is part of the reading.
     <br><br>
     No total is shown. Nothing here is closed, so none of it is a result: the
     P&amp;L section counts closed trades only, and a summed unrealized figure
@@ -464,7 +504,7 @@
     order would have got.
   </div></div>
 
-  <footer id="rgn-footer">Generated 2026-08-19T18:45:28.243948+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
+  <footer id="rgn-footer">Generated 2026-08-19T19:00:35.687120+00:00<br>mode paper · LIVE_TRADING_CONFIRMED=NO · trial count 4 · 1 strategies enabled · 0 closed trades<br><b>Paper trading. Not investment advice.</b> Every figure above measures a practice account that has never placed a trade, and no strategy in this repository has demonstrated an edge distinguishable from zero.</footer>
 
 </div>
 <script>
